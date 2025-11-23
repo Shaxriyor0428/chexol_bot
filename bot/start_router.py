@@ -9,6 +9,10 @@ from bot.services.user import get_user_by_chat, create_user
 
 router = Router()
 
+@router.message(F.chat.type.in_({"group", "supergroup"}))
+async def handle_group_registration(message: types.Message):
+
+    return None
 
 
 @router.message(Command("start"))
