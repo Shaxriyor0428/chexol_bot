@@ -9,20 +9,6 @@ from bot.services.user import get_user_by_chat, create_user
 
 router = Router()
 
-@router.message()
-async def message_handler(message: types.Message):
-    print(message)
-    if message.chat.type != "private":
-        return
-
-    warning_msg = await message.answer("⚠️ Noto‘g‘ri ma’lumot kiritildi.")
-
-    await sleep(1)
-    try:
-        await message.delete()
-        await warning_msg.delete()
-    except Exception as e:
-        print(f"❗ Xabarni o‘chirishda xatolik: {e}")
 
 
 @router.message(Command("start"))
@@ -92,3 +78,16 @@ async def invite_link_handler(message: types.Message):
 
 
 
+@router.message()
+async def message_handler(message: types.Message):
+    if message.chat.type != "private":
+        return
+
+    warning_msg = await message.answer("⚠️ Noto‘g‘ri ma’lumot kiritildi.")
+
+    await sleep(1)
+    try:
+        await message.delete()
+        await warning_msg.delete()
+    except Exception as e:
+        print(f"❗ Xabarni o‘chirishda xatolik: {e}")

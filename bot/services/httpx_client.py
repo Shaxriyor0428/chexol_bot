@@ -2,7 +2,7 @@ import httpx
 
 
 class APIClient:
-    BASE_URL = "http://127.0.0.1:8000"
+    BASE_URL = "http://127.0.0.1:8011"
 
     def __init__(self, token: str = None, timeout: int = 10):
         self.token = token
