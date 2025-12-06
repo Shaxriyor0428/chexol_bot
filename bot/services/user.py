@@ -21,3 +21,14 @@ async def create_user(user_chat_id: int, referral_chat_id: int = None):
     user = await api.post("/users/create_user_for_bot/", data=data)
     # print("NATIJA: ", user)
     return user
+
+
+async def update_order(order_id: str, status: str, processed_by_name: str = None):
+    data = {
+        "payment_status": status,
+        "processed_by_name": processed_by_name
+    }
+    order = await api.patch(f"/orders/{order_id}/", data=data)
+    return order
+
+

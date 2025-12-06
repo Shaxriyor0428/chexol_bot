@@ -2,7 +2,6 @@ from aiogram import types, F, Router
 from aiogram.filters import Command
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.fsm.context import FSMContext
-from asyncio import sleep
 
 from bot.keyboard import user_menu_keyboard
 from bot.services.user import get_user_by_chat, create_user
@@ -39,7 +38,7 @@ async def start_handler(message: types.Message, state: FSMContext):
         user = await get_user_by_chat(message.chat.id)
 
     # 🟧 Agar foydalanuvchi ro‘yxatdan o‘tmagan bo‘lsa (region yo‘q bo‘lsa)
-    print(user)
+    # print(user)
     if not user or not user["phone"]:
         return await message.answer(
             "👋 Salom!\n\n"
@@ -81,17 +80,3 @@ async def invite_link_handler(message: types.Message):
     await message.answer(text, reply_markup=builder.as_markup())
 
 
-
-@router.message()
-async def message_handler(message: types.Message):
-    if message.chat.type != "private":
-        return
-
-    warning_msg = await message.answer("⚠️ Noto‘g‘ri ma’lumot kiritildi.")
-
-    await sleep(1)
-    try:
-        await message.delete()
-        await warning_msg.delete()
-    except Exception as e:
-        print(f"❗ Xabarni o‘chirishda xatolik: {e}")

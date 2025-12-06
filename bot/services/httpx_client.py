@@ -32,6 +32,9 @@ class APIClient:
     async def put(self, url: str, data: dict = None):
         return await self._request("PUT", url, json=data)
 
+    async def patch(self, url: str, data: dict = None):
+        return await self._request("PATCH", url, json=data)
+
     async def delete(self, url: str):
         return await self._request("DELETE", url)
 
